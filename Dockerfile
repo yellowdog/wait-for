@@ -1,11 +1,6 @@
-FROM node:alpine
+FROM bash:latest
 
-RUN apk add --no-cache bash
+COPY wait-for.sh ./
+COPY entrypoint.sh ./
 
-RUN mkdir -p /app
-WORKDIR /app
-
-COPY . /app
-RUN npm install
-
-CMD ./node_modules/.bin/bats wait-for.bats
+CMD /entrypoint.sh
